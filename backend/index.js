@@ -13,6 +13,7 @@ app.use("/results", results);
 results.get("/", async (req, res) => {
   try {
     let all = await main();
+
     res.send(all);
   } catch (error) {
     res.statusCode = 404;
@@ -28,7 +29,7 @@ const main = async () => {
     "#video-title > yt-formatted-string"
   );
   let text = await page.evaluate((element) => element.textContent, element);
-  console.log(text);
+
   browser.close();
 
   return text;
