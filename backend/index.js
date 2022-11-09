@@ -11,6 +11,9 @@ const main = async (greetings) => {
   );
   var text = await page.evaluate((element) => element.textContent, element);
   console.log(text);
+  browser.close();
 
   console.log(greetings);
 };
+
+main("heres psy");
