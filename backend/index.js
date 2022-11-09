@@ -1,4 +1,6 @@
 const puppeteer = require("puppeteer");
+const express = require("express");
+const app = express();
 
 const main = async (greetings) => {
   const browser = await puppeteer.launch({});
@@ -12,5 +14,3 @@ const main = async (greetings) => {
 
   console.log(greetings);
 };
-
-main("test");
