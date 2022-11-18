@@ -11,8 +11,10 @@ const port = 8080;
 app.use("/results", results);
 
 results.get("/", async (req, res) => {
+  var queryItem = req.query.tag;
+  console.log(queryItem);
   try {
-    let all = await main();
+    let all = await main(queryItem);
 
     res.send(all);
   } catch (error) {
@@ -21,10 +23,15 @@ results.get("/", async (req, res) => {
   }
 });
 
-const main = async () => {
+const main = async (search_query) => {
+  console.log(search_query);
+  let formAddress =
+    (await "https://www.youtube.com/results?search_query=") + search_query;
   const browser = await puppeteer.launch({});
   const page = await browser.newPage();
-  await page.goto("https://www.youtube.com/results?search_query=gangnam+style");
+
+  await page.goto(formAddress);
+  console.log(formAddress);
   let element = await page.waitForSelector(
     "#video-title > yt-formatted-string"
   );
